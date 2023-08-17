@@ -2,10 +2,10 @@
 const express = require("express");
 const https = require("https");
 const fs = require("fs");
-const AWS = require("aws-sdk");
+// const AWS = require("aws-sdk");
 
 const app = express();
-const secretsManager = new AWS.SecretsManager();
+// const secretsManager = new AWS.SecretsManager();
 
 async function startServer() {
   try {
