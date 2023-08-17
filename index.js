@@ -9,14 +9,14 @@ const secretsManager = new AWS.SecretsManager();
 
 async function startServer() {
   try {
-    const { ServerKey, ServerCert, CACert } = await getCertificatesFromSecretsManager();
+    // const { ServerKey, ServerCert, CACert } = await getCertificatesFromSecretsManager();
     const serverOptions = {
-      // key: fs.readFileSync('server-private-key.pem'),
-      // cert: fs.readFileSync('server-certificate.pem'),
-      // ca: fs.readFileSync('root-ca-certificate.pem'),
-      key: ServerKey,
-      cert: ServerCert,
-      ca: CACert,
+      key: fs.readFileSync('server-private-key.pem'),
+      cert: fs.readFileSync('server-certificate.pem'),
+      ca: fs.readFileSync('root-ca-certificate.pem'),
+    //   key: ServerKey,
+    //   cert: ServerCert,
+    //   ca: CACert,
       requestCert: true,
       rejectUnauthorized: true
     };
@@ -39,9 +39,9 @@ async function startServer() {
   }
 }
 
-async function getCertificatesFromSecretsManager() {
-  const secrets = await secretsManager.getSecretValue({ SecretId: "mutualTLSDemoCertificates" }).promise();
-  return JSON.parse(secrets.SecretString);
-}
+// async function getCertificatesFromSecretsManager() {
+//   const secrets = await secretsManager.getSecretValue({ SecretId: "mutualTLSDemoCertificates" }).promise();
+//   return JSON.parse(secrets.SecretString);
+// }
 
 startServer();
